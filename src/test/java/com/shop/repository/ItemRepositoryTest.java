@@ -1,12 +1,17 @@
 package com.shop.repository;
 
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.constant.ItemSellStatus;
 import com.shop.entity.Item;
+import com.shop.entity.QItem;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.swing.text.html.parser.Entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,6 +21,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class ItemRepositoryTest {
     @Autowired //test에서는 생성자 주입이 안됨
     ItemRepository itemRepository;
+
+    @Autowired
+    EntityManager em;
+
 
     public void createItemList(){
         for(int i=0; i<=10; i++){
@@ -29,6 +38,24 @@ class ItemRepositoryTest {
                     .updateTime(LocalDateTime.now())
                     .build();
             Item savedItem = itemRepository.save(item); //실제도 데이터베이스에 저장
+        }
+    }
+
+    @Test
+    @DisplayName("Querydsl 조회 테스트 1")
+    public void queryDslTest(){
+        this.createItemList();
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        QItem qItem = QItem.item;
+
+        List<Item> itemList = queryFactory.select(qItem)
+                .from(qItem)
+                .where(qItem.itemDetail.like("%테스트%"))
+                .orderBy(qItem.price.desc())
+                .fetch(); //이 시점에 쿼리문이 실행된다. 쿼리 결과를 리스트로 반환
+
+        for(Item item : itemList){
+            System.out.println(item.toString());
         }
     }
 
