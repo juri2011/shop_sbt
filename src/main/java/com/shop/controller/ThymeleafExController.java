@@ -31,15 +31,15 @@ public class ThymeleafExController {
         model.addAttribute("itemDto", itemDto);
         return "thymeleafEx/thymeleafEx02";
     }
-    @GetMapping("/ex02")
+    @GetMapping("/ex03")
     public String thymeleafExample03(Model model){
         List<ItemDto> itemDtoList = new ArrayList<>();
 
         for(int i=1; i<=10; i++){
             ItemDto itemDto = ItemDto.builder()
-                    .itemDetail("상품 상세 설명")
-                    .itemNm("테스트 상품1")
-                    .price(10000)
+                    .itemDetail("상품 상세 설명"+i)
+                    .itemNm("테스트 상품"+i)
+                    .price(1000*i)
                     .regTime(LocalDateTime.now())
                     .build();
 
