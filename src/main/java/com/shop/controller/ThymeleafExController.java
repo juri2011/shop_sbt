@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -69,14 +70,15 @@ public class ThymeleafExController {
         model.addAttribute("itemDtoList", itemDtoList);
         return "thymeleafEx/thymeleafEx04";
     }
-    //사실상 위에 ex03과 똑같음...
     @GetMapping("/ex05")
     public String thymeleafExample05(){
         return "thymeleafEx/thymeleafEx05";
     }
-    //사실상 위에 ex03과 똑같음...
+
+    //spring boot 3버전 부터는 파라미터 앞에 어노테이션을 붙여야 에러가 생기지 않는다.
+    //@RequestParam -> 쿼리스트링 뒤에 붙는 파라미터 이름으로 바인딩
     @GetMapping("/ex06")
-    public String thymeleafExample06(String param1, String param2, Model model){
+    public String thymeleafExample06(@RequestParam("param1") String param1, @RequestParam("param2") String param2, Model model){
         model.addAttribute("param1", param1);
         model.addAttribute("param2", param2);
         return "thymeleafEx/thymeleafEx06";
