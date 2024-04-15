@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>파라미터 전달 예제</h1>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}" lang="en">
 
-    <div th:text="${param1}"></div>
-    <div th:text="${param2}"></div>
+    <!-- layout1.html 파일의 <div layout:fragment="content"> 영역에 들어가는 부분 -->
+    <div layout:fragment="content">
+        본문 영역입니다.
+    </div>
 
-</body>
 </html>
