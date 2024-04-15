@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <th:block layout:fragment="script"></th:block>
+    <th:block layout:fragment="css"></th:block>
+</head>
+<body>
+
+    <!-- th:replace - 해당 속성이 선언된 html 태그를 다른 html파일로 치환 -->
+    <div th:replace="~{fragments/header::header}"></div>
+    <!-- layout에서 변경되는 영역을 fragment로 설정 -->
+    <div layout:fragment="content" class="content"></div>
+    <div th:replace="~{fragments/footer::footer}"></div>
+</body>
+</html>
