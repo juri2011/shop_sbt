@@ -50,4 +50,24 @@ public class ThymeleafExController {
         return "thymeleafEx/thymeleafEx03";
     }
 
+    //사실상 위에 ex03과 똑같음...
+    @GetMapping("/ex04")
+    public String thymeleafExample04(Model model){
+        List<ItemDto> itemDtoList = new ArrayList<>();
+
+        for(int i=1; i<=10; i++){
+            ItemDto itemDto = ItemDto.builder()
+                    .itemDetail("상품 상세 설명"+i)
+                    .itemNm("테스트 상품"+i)
+                    .price(1000*i)
+                    .regTime(LocalDateTime.now())
+                    .build();
+
+            itemDtoList.add(itemDto);
+        }
+
+        model.addAttribute("itemDtoList", itemDtoList);
+        return "thymeleafEx/thymeleafEx04";
+    }
+
 }
