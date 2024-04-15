@@ -33,7 +33,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    //회원가입 -> memberFormDto -> member
+    //memberFormDto롤 member로 변환해서 반환
     public static Member createMember(MemberFormDto memberFormDto,
                                       PasswordEncoder passwordEncoder){
         Member member = Member.builder()

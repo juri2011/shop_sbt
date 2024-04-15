@@ -33,6 +33,13 @@ public class SecurityConfig{
         //로그아웃 URL을 /logout으로 설정하고, 리다이렉션 수행 없디 단순히 로그아웃 처리만 함
         http.logout(Customizer.withDefaults());
 
+        http.authorizeRequests(request -> request/*
+                .requestMatchers("/css/**").permitAll()
+                .requestMatchers("/images/**").permitAll()
+                .requestMatchers("/", "/member/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")*/
+                .anyRequest().authenticated());
+
         return http.build();
     }
 
